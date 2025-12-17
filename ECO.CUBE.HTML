@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ECO³ – Ecology, Collaboration, Open Education Group</title>
+
+  <style>
+    :root {
+      --bg-page: #f5f7fa;
+      --bg-card: #ffffff;
+      --accent: #1b7a5e;
+      --accent-soft: rgba(27, 122, 94, 0.08);
+      --text-main: #1a1f2e;
+      --text-dim: #4a5568;
+      --border-color: #d7dbe3;
+      --radius-xl: 1.25rem;
+      --radius-lg: 0.75rem;
+      --radius-md: 0.5rem;
+      --shadow-card: 0 24px 48px rgba(0,0,0,0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: radial-gradient(circle at 20% 20%, #e8fff6 0%, #ffffff 60%);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 30px 60px rgba(27,122,94,0.08);
+      position: relative;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .brand-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-eco {
+      font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem);
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: baseline;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-eco sup {
+      font-size: 0.6em;
+      font-weight: 500;
+      margin-left: 0.2rem;
+      background: var(--accent);
+      color: #fff;
+      line-height: 1;
+      padding: 0.15rem 0.4rem;
+      border-radius: var(--radius-md);
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 460px;
+      line-height: 1.4;
+      margin-top: 0.5rem;
+    }
+
+    .partners-badge {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      background: var(--accent-soft);
+      border: 1px solid rgba(27,122,94,0.18);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 1rem;
+      max-width: 100%;
+    }
+
+    .partners-badge span {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    nav {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      padding: 0.5rem;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-width: max-content;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      font-weight: 500;
+      color: var(--text-dim);
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 12px 24px rgba(27,122,94,0.3);
+    }
+
+    .tab-btn:not(.active):hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(27,122,94,0.3);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem 1.5rem 2rem;
+      display: none; /* shown via JS */
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 800px;
+      line-height: 1.4;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px,100%), 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.04);
+      padding: 1rem 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 160px;
+    }
+
+    .label-small {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: var(--radius-md);
+      padding: 0.25rem 0.5rem;
+      display: inline-block;
+      line-height: 1.2;
+      border: 1px solid rgba(27,122,94,0.2);
+      max-width: max-content;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 0.75rem 0 0.5rem;
+      line-height: 1.3;
+      letter-spacing: -0.03em;
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .card-footer {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .about-block {
+      display: grid;
+      grid-template-columns: minmax(0,1fr);
+      gap: 1.5rem;
+    }
+
+    @media(min-width: 800px){
+      .about-block {
+        grid-template-columns: minmax(0,2fr) minmax(0,1fr);
+      }
+    }
+
+    .about-text p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .about-text p span.key {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .about-side {
+      background: var(--accent-soft);
+      border: 1px solid rgba(27,122,94,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem 1.25rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    .about-side b {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    footer .footer-inner {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      border-radius: var(--radius-xl);
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1.25rem;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .muted {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    /* publications list layout for many papers */
+    .pub-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
+      gap: 1rem;
+    }
+
+    .pub-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.04);
+      padding: 1rem 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pub-journal-year {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: var(--radius-md);
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(27,122,94,0.2);
+      line-height: 1.2;
+      max-width: max-content;
+    }
+
+    .pub-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 0.75rem 0 0.5rem;
+      line-height: 1.4;
+      letter-spacing: -0.03em;
+    }
+
+    .pub-authors {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    .pub-notes {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+      line-height: 1.4;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand-block">
+          <div class="logo-eco">
+            ECO<sup>³</sup>
+          </div>
+          <div class="subtitle">
+            Ecology, Collaboration, Open Education Group.<br/>
+            An open learning space on fire, water, climate resilience, and ecosystem restoration —
+            built by Radboud University (Netherlands), UFJF (Brazil), and UNEMAT (Brazil).
+          </div>
+        </div>
+
+        <div class="partners-badge">
+          <div><span>Radboud University</span> · Netherlands</div>
+          <div><span>UFJF</span> · Federal University of Juiz de Fora · Brazil</div>
+          <div><span>UNEMAT</span> · State University of Mato Grosso · Brazil</div>
+        </div>
+      </div>
+
+      <nav>
+        <button class="tab-btn active" data-tab="classes">Classes</button>
+        <button class="tab-btn" data-tab="publications">Publications</button>
+        <button class="tab-btn" data-tab="gallery">Gallery</button>
+        <button class="tab-btn" data-tab="about">About</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- CLASSES -->
+    <section class="panel active" id="panel-classes">
+      <div class="panel-header">
+        <div class="panel-title">
+          📚 Classes & Recorded Lectures
+        </div>
+        <div class="panel-desc">
+          Short courses, recorded lectures, and workshop material.
+          Here you can include topics like fire ecology, aquatic systems, climate change in the Pantanal,
+          statistics for environmental science, geoprocessing in R, and restoration practices.
+        </div>
+      </div>
+
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="label-small">Video lecture</div>
+          <div class="card-title">Fire, ash, and water quality in tropical wetlands</div>
+          <div class="card-text">
+            Placeholder for embedded YouTube/Vimeo link. Students explain how wildfire ash
+            affects water chemistry, plankton communities, and CO₂ fluxes.
+          </div>
+          <div class="card-footer">
+            Instructor: UNEMAT · Field case: Pantanal (Brazil)
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label-small">Mini-course</div>
+          <div class="card-title">Applied Statistics to Environmental Sciences</div>
+          <div class="card-text">
+            PDF slides + recorded session. Intro to experimental design,
+            basic modeling, and interpretation of ecological data.
+          </div>
+          <div class="card-footer">
+            Joint session · UFJF / Radboud
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label-small">Workshop</div>
+          <div class="card-title">Introduction to Geoprocessing and Mapping in R</div>
+          <div class="card-text">
+            Code examples and step-by-step demos for spatial data analysis.
+            This block will host .R scripts and screen-capture tutorials.
+          </div>
+          <div class="card-footer">
+            Hands-on material · UFJF
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label-small">Field school</div>
+          <div class="card-title">Climate Change and Environmental Consequences</div>
+          <div class="card-text">
+            Lecture notes and field activities comparing European peatlands under fire pressure
+            and Pantanal floodplains under drought and burning.
+          </div>
+          <div class="card-footer">
+            Joint teaching · Radboud / UNEMAT
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="panel" id="panel-publications">
+      <div class="panel-header">
+        <div class="panel-title">
+          📄 Publications & Reading
+        </div>
+        <div class="panel-desc">
+          Open-access articles, reports, and student theses related to fire ecology,
+          aquatic systems, ash deposition, restoration, and socio-environmental resilience.
+          Below are joint works emerging from collaborations among Radboud, UFJF, and UNEMAT.
+        </div>
+      </div>
+
+      <div class="pub-list">
+
+        <!-- 1 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Resources, Conservation & Recycling · 2025</div>
+          <div class="pub-title">
+            Low carbon footprint of Nile tilapia farming with recirculation aquaculture.
+          </div>
+          <div class="pub-authors">
+            Melo Júnior, A.M. de; Kosten, S.; Duque, V.L.C.; Santos, A.A.O.; Amado, A.M.; Soranço, L.C.;
+            Dreise, J.; Martins, A.C.; Nasário, J.; Dalbem Barbosa, A.P.; Muzitano, I.S.; Cardoso, G.M.;
+            Barbosa, Í.; Paranaíba, J.R.; de Oliveira, G.R.; Almeida, R.; Roland, F.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: aquaculture sustainability and carbon footprint.
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Geoderma · 2024</div>
+          <div class="pub-title">
+            Year-round CO₂ emissions from the drawdown area of a tropical reservoir:
+            Strong seasonal and spatial variation.
+          </div>
+          <div class="pub-authors">
+            Barbosa, Í.; Paranaíba, J.R.; Sobek, S.; Kosten, S.; Almeida, R.M.; Duque, V.; Mendonça, N.;
+            Barros, N.; Mendonça, R.
+          </div>
+          <div class="pub-notes">
+            Focus: CO₂ fluxes linked to exposed reservoir sediments.
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Frontiers in Water · 2023</div>
+          <div class="pub-title">
+            Widespread dominance of methane ebullition over diffusion
+            in freshwater aquaculture ponds.
+          </div>
+          <div class="pub-authors">
+            Vroom, R.J.E.; Kosten, S.; Almeida, R.M.; Mendonça, R.; Muzitano, I.S.;
+            Barbosa, Í.; Nasário, J.; Oliveira Junior, E.S.; Flecker, A.S.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: methane emissions in aquaculture systems.
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">PLOS ONE · 2020</div>
+          <div class="pub-title">
+            Sediment drying–rewetting cycles enhance greenhouse gas emissions,
+            nutrient and trace element release, and promote water cytogenotoxicity.
+          </div>
+          <div class="pub-authors">
+            Paranaíba, J.R.; Quadra, G.; Josué, I.I.P.; Almeida, R.M.; Mendonça, R.;
+            Cardoso, S.J.; Silva, J.; Kosten, S.; Campos, J.M.; Almeida, J.; Araújo, R.L.;
+            Roland, F.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: how hydrological fluctuation boosts GHG and contaminants.
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Science of the Total Environment · 2020</div>
+          <div class="pub-title">
+            Better assessments of greenhouse gas emissions from global fish ponds
+            needed to adequately evaluate aquaculture footprint.
+          </div>
+          <div class="pub-authors">
+            Kosten, S.; Almeida, R.M.; Barbosa, Í.; Mendonça, R.; Muzitano, I.S.;
+            Oliveira-Junior, E.S.; Vroom, R.J.E.; Wang, H.-J.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: calling for stronger global accounting of aquaculture GHG.
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Limnology & Oceanography · 2019</div>
+          <div class="pub-title">
+            Seasonal and diel variation in greenhouse gas emissions from an urban pond
+            and its major drivers.
+          </div>
+          <div class="pub-authors">
+            Bergen, T.J.H.M.; Barros, N.; Mendonça, R.; Aben, R.C.H.; Althuizen, I.H.J.;
+            Huszar, V.; Lamers, L.P.M.; Lürling, M.; Roland, F.; Kosten, S.
+          </div>
+          <div class="pub-notes">
+            Focus: how time of day and season control GHG in urban waters.
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Aquatic Sciences · 2019</div>
+          <div class="pub-title">
+            Carbon dioxide emission from drawdown areas of a Brazilian reservoir
+            is linked to surrounding land cover.
+          </div>
+          <div class="pub-authors">
+            Almeida, R.M.; Paranaíba, J.R.; Barbosa, Í.; Sobek, S.; Kosten, S.;
+            Linkhorst, A.; Mendonça, R.; Quadra, G.; Roland, F.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: land use and CO₂ hotspots at reservoir margins.
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Inland Waters · 2018</div>
+          <div class="pub-title">
+            Extreme drought boosts CO and CH₄ emissions from reservoir drawdown areas.
+          </div>
+          <div class="pub-authors">
+            Kosten, S.; van den Berg, S.; Mendonça, R.; Paranaíba, J.R.; Roland, F.;
+            Sobek, S.; van den Hoek, J.; Barros, N.
+          </div>
+          <div class="pub-notes">
+            Focus: drought intensifies greenhouse gas release.
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Nature Communications · 2017</div>
+          <div class="pub-title">
+            Cross-continental increase in methane ebullition under climate change.
+          </div>
+          <div class="pub-authors">
+            Aben, R.C.H.; Barros, N.; van Donk, E.; Frenken, T.; Hilt, S.; Kazanjian, G.;
+            Lamers, L.P.M.; Peeters, E.T.H.M.; Roelofs, J.G.M.; de Senerpont Domis, L.N.;
+            Stephan, S.; Velthuis, M.; van de Waal, D.B.; Wik, M.; Thornton, B.F.; Wilkinson, J.;
+            Delsontro, T.; Kosten, S.
+          </div>
+          <div class="pub-notes">
+            Focus: methane bubbling (ebullition) intensifies with warming.
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="pub-card">
+          <div class="pub-journal-year">Frontiers in Microbiology · 2016</div>
+          <div class="pub-title">
+            High primary production contrasts with intense carbon emission
+            in a eutrophic tropical reservoir.
+          </div>
+          <div class="pub-authors">
+            Almeida, R.M.; Nóbrega, G.N.; Junger, P.C.; Figueiredo, A.V.; Andrade, A.S.;
+            de Moura, C.G.B.; Tonetta, D.; Oliveira, E.S.; Araújo, F.; Rust, F.; Piñeiro-Guerra, J.M.;
+            Mendonça, J.R.; Medeiros, L.R.; Pinheiro, L.; Miranda, M.; Costa, M.R.A.;
+            Melo, M.L.; Nobre, R.L.G.; Benevides, T.; Barros, N. et al.
+          </div>
+          <div class="pub-notes">
+            Focus: productivity vs. carbon emissions in tropical reservoirs.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="panel" id="panel-gallery">
+      <div class="panel-header">
+        <div class="panel-title">
+          📷 Field Gallery
+        </div>
+        <div class="panel-desc">
+          Photos from field campaigns, lab work, community outreach,
+          Saberes em Arte, Transforma-Ações, and COP Pantanal – Saberes e Ações pelo Clima.
+          (Here you will later drop images + captions.)
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="label-small">Pantanal · Brazil</div>
+          <div class="card-title">Community environmental workshop</div>
+          <div class="card-text">
+            Students leading fire and water quality outreach activities with local schools
+            and riverside families in Cáceres–MT. Educational material + dialogue circle.
+          </div>
+          <div class="card-footer">
+            Programme: Transforma-Ações
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label-small">The Netherlands</div>
+          <div class="card-title">Peatland burn site survey</div>
+          <div class="card-text">
+            Dutch and Brazilian students collecting samples in a post-fire peatland area,
+            discussing restoration strategies and carbon balance.
+          </div>
+          <div class="card-footer">
+            Field supervision: Radboud University
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label-small">Outreach / Schools</div>
+          <div class="card-title">Saberes em Arte</div>
+          <div class="card-text">
+            Art, performance, and science communication in public spaces.
+            Students translating climate and water research into accessible language
+            for children and local communities.
+          </div>
+          <div class="card-footer">
+            Led by UNEMAT students
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="panel" id="panel-about">
+      <div class="panel-header">
+        <div class="panel-title">
+          🌎 About ECO<sup>³</sup>
+        </div>
+        <div class="panel-desc">
+          Who we are, what we are building, and how people can participate.
+        </div>
+      </div>
+
+      <div class="about-block">
+        <div class="about-text">
+          <p>
+            <span class="key">ECO³ (Ecology, Collaboration, Open Education Group)</span>
+            is an open learning platform created by Radboud University
+            (The Netherlands), UFJF (Universidade Federal de Juiz de Fora, Brazil),
+            and UNEMAT (Universidade do Estado de Mato Grosso, Brazil).
+          </p>
+
+          <p>
+            The platform brings together recorded classes, field material,
+            photos, reading suggestions, and outreach experiences related to
+            fire, ash, water, climate resilience, carbon fluxes, and ecosystem restoration.
+          </p>
+
+          <p>
+            A defining element of ECO³ is student protagonism. Students are not only
+            “recipients of content”, they are knowledge producers. They participate in
+            field campaigns in the Pantanal and in European peatlands, engage in community
+            meetings, visit schools, and present accessible explanations of complex topics
+            such as fire ecology and water quality.
+          </p>
+
+          <p>
+            Many of these outreach actions happen through initiatives such as
+            <b>Saberes em Arte</b> (“Knowledge through Art”), <b>Transforma-Ações</b>
+            (“Transforming Actions”), and <b>COP Pantanal – Saberes e Ações pelo Clima</b>,
+            where environmental science, public dialogue, and culture meet.
+          </p>
+
+          <p>
+            By sharing material in English and Portuguese, ECO³ supports an inclusive,
+            intercultural bridge between Brazil and Europe, strengthening both scientific
+            collaboration and local environmental action.
+          </p>
+        </div>
+
+        <aside class="about-side">
+          <b>How this will grow:</b><br/><br/>
+          • Add new video classes and mini-courses (YouTube/Vimeo embeds).<br/>
+          • Link PDFs / DOIs of joint publications.<br/>
+          • Upload field photos with captions and credits.<br/>
+          • Showcase outreach activities with schools and communities.<br/><br/>
+          Future steps may include student accounts,
+          bilingual material (EN/PT), and live sessions.
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p><b>ECO³ – Ecology, Collaboration, Open Education Group</b></p>
+      <p class="muted">
+        Radboud University · UFJF · UNEMAT
+      </p>
+      <p class="muted">
+        Open environmental learning platform. Early prototype.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // simple tab system
+    const tabs = document.querySelectorAll(".tab-btn");
+    const panels = {
+      classes: document.getElementById("panel-classes"),
+      publications: document.getElementById("panel-publications"),
+      gallery: document.getElementById("panel-gallery"),
+      about: document.getElementById("panel-about"),
+    };
+
+    tabs.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // set active tab button
+        tabs.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // show relevant panel
+        const tabName = btn.getAttribute("data-tab");
+        Object.keys(panels).forEach(name => {
+          if (name === tabName) {
+            panels[name].classList.add("active");
+          } else {
+            panels[name].classList.remove("active");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
