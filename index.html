@@ -430,6 +430,7 @@
         <button class="tab-btn" data-tab="publications">Publications</button>
         <button class="tab-btn" data-tab="gallery">Gallery</button>
         <button class="tab-btn" data-tab="about">About</button>
+        <button class="tab-btn" data-tab="quiz">Quiz</button>
       </nav>
     </div>
   </header>
@@ -568,6 +569,31 @@
 
       </div>
     </section>
+
+    <!-- QUIZ -->
+<section class="panel" id="panel-quiz">
+  <div class="panel-header">
+    <div class="panel-title">🧠 Interactive Science Quiz</div>
+    <div class="panel-desc">
+      A short quiz to explore how fire, water, climate, and restoration really work in ecosystems.
+      No tricks — just good science.
+    </div>
+  </div>
+
+  <div class="card" id="quiz-box">
+    <div class="card-title" id="question"></div>
+
+    <div id="answers" style="display:grid; gap:0.6rem; margin-top:1rem;"></div>
+
+    <div id="feedback" style="margin-top:1rem; font-size:0.85rem;"></div>
+
+    <button id="nextBtn"
+      style="margin-top:1.2rem; display:none;"
+      class="btn-primary">
+      Next question →
+    </button>
+  </div>
+</section>
 
     <!-- PUBLICATIONS -->
     <section class="panel" id="panel-publications">
@@ -801,12 +827,13 @@
     const tabs = document.querySelectorAll(".tab-btn");
 
     const panels = {
-      classes: document.getElementById("panel-classes"),
-      events: document.getElementById("panel-events"),
-      publications: document.getElementById("panel-publications"),
-      gallery: document.getElementById("panel-gallery"),
-      about: document.getElementById("panel-about"),
-    };
+  classes: document.getElementById("panel-classes"),
+  events: document.getElementById("panel-events"),
+  quiz: document.getElementById("panel-quiz"),
+  publications: document.getElementById("panel-publications"),
+  gallery: document.getElementById("panel-gallery"),
+  about: document.getElementById("panel-about"),
+};
 
     tabs.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -823,3 +850,4 @@
   </script>
 </body>
 </html>
+
