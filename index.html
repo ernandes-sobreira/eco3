@@ -20,10 +20,7 @@
       --shadow-card: 0 24px 48px rgba(0,0,0,0.07);
     }
 
-    * {
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-    }
+    * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
     body {
       margin: 0;
@@ -61,10 +58,7 @@
       gap: 1rem;
     }
 
-    .brand-block {
-      display: flex;
-      flex-direction: column;
-    }
+    .brand-block { display: flex; flex-direction: column; }
 
     .logo-eco {
       font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem);
@@ -108,10 +102,7 @@
       max-width: 100%;
     }
 
-    .partners-badge span {
-      font-weight: 600;
-      color: var(--accent);
-    }
+    .partners-badge span { font-weight: 600; color: var(--accent); }
 
     nav {
       background: #fff;
@@ -170,12 +161,10 @@
       box-shadow: var(--shadow-card);
       border: 1px solid var(--border-color);
       padding: 1.5rem 1.5rem 2rem;
-      display: none; /* shown via JS */
+      display: none;
     }
 
-    .panel.active {
-      display: block;
-    }
+    .panel.active { display: block; }
 
     .panel-header {
       display: flex;
@@ -261,43 +250,54 @@
       line-height: 1.4;
     }
 
-    .about-block {
-      display: grid;
-      grid-template-columns: minmax(0,1fr);
-      gap: 1.5rem;
+    /* clickable image cards */
+    a.card-link {
+      text-decoration: none;
+      color: inherit;
+      padding: 0;
+      overflow: hidden;
+    }
+    a.card-link .img-wrap {
+      padding: 0.85rem;
+    }
+    a.card-link img {
+      width: 100%;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border-color);
+      display: block;
     }
 
-    @media(min-width: 800px){
-      .about-block {
-        grid-template-columns: minmax(0,2fr) minmax(0,1fr);
-      }
+    .btn-row {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
     }
 
-    .about-text p {
-      margin: 0 0 1rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--text-main);
-    }
-
-    .about-text p span.key {
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .about-side {
-      background: var(--accent-soft);
-      border: 1px solid rgba(27,122,94,0.2);
+    .btn-primary, .btn-secondary {
+      text-decoration: none;
+      padding: 0.6rem 0.9rem;
       border-radius: var(--radius-lg);
-      padding: 1rem 1.25rem 1.25rem;
       font-size: 0.8rem;
-      color: var(--text-dim);
-      line-height: 1.4;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1;
+      white-space: nowrap;
     }
 
-    .about-side b {
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(27,122,94,0.35);
+    }
+
+    .btn-secondary {
+      background: #fff;
       color: var(--accent);
-      font-weight: 600;
+      border: 1px solid rgba(27,122,94,0.4);
     }
 
     footer {
@@ -320,14 +320,8 @@
       padding: 1rem 1.5rem 1.25rem;
     }
 
-    footer p {
-      margin: 0.5rem 0;
-    }
-
-    .muted {
-      color: var(--text-dim);
-      font-size: 0.8rem;
-    }
+    footer p { margin: 0.5rem 0; }
+    .muted { color: var(--text-dim); font-size: 0.8rem; }
 
     /* publications list layout for many papers */
     .pub-list {
@@ -335,7 +329,6 @@
       grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
       gap: 1rem;
     }
-
     .pub-card {
       background: #fff;
       border: 1px solid var(--border-color);
@@ -345,7 +338,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .pub-journal-year {
       font-size: 0.7rem;
       font-weight: 600;
@@ -357,7 +349,6 @@
       line-height: 1.2;
       max-width: max-content;
     }
-
     .pub-title {
       font-size: 0.9rem;
       font-weight: 600;
@@ -366,13 +357,11 @@
       line-height: 1.4;
       letter-spacing: -0.03em;
     }
-
     .pub-authors {
       font-size: 0.8rem;
       color: var(--text-dim);
       line-height: 1.4;
     }
-
     .pub-notes {
       font-size: 0.75rem;
       color: var(--text-dim);
@@ -381,6 +370,34 @@
       border-top: 1px solid var(--border-color);
       padding-top: 0.75rem;
     }
+
+    .about-block {
+      display: grid;
+      grid-template-columns: minmax(0,1fr);
+      gap: 1.5rem;
+    }
+    @media(min-width: 800px){
+      .about-block {
+        grid-template-columns: minmax(0,2fr) minmax(0,1fr);
+      }
+    }
+    .about-text p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+    .about-text p span.key { font-weight: 600; color: var(--accent); }
+    .about-side {
+      background: var(--accent-soft);
+      border: 1px solid rgba(27,122,94,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem 1.25rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    .about-side b { color: var(--accent); font-weight: 600; }
 
   </style>
 </head>
@@ -409,6 +426,7 @@
 
       <nav>
         <button class="tab-btn active" data-tab="classes">Classes</button>
+        <button class="tab-btn" data-tab="events">Events</button>
         <button class="tab-btn" data-tab="publications">Publications</button>
         <button class="tab-btn" data-tab="gallery">Gallery</button>
         <button class="tab-btn" data-tab="about">About</button>
@@ -420,9 +438,7 @@
     <!-- CLASSES -->
     <section class="panel active" id="panel-classes">
       <div class="panel-header">
-        <div class="panel-title">
-          📚 Classes & Recorded Lectures
-        </div>
+        <div class="panel-title">📚 Classes & Recorded Lectures</div>
         <div class="panel-desc">
           Short courses, recorded lectures, and workshop material.
           Here you can include topics like fire ecology, aquatic systems, climate change in the Pantanal,
@@ -430,97 +446,22 @@
         </div>
       </div>
 
-      <!-- MINI SYMPOSIUM INVITES -->
-<div class="card" style="grid-column: 1 / -1;">
-  <div class="label-small">MINI SYMPOSIUM · CALL FOR PARTICIPATION</div>
-  <div class="card-title">🌿 Join our Mini Symposium</div>
-  <div class="card-text">
-    Click the cards below to view the invitation posters and share with your network.
-  </div>
-</div>
-
-<div class="card-grid">
-  <div class="card">
-    <img src="assets/invites/invite-1.png" alt="Mini symposium invite 1" style="width:100%; border-radius: 0.5rem;">
-  </div>
-
-  <div class="card">
-    <img src="assets/invites/invite-2.png" alt="Mini symposium invite 2" style="width:100%; border-radius: 0.5rem;">
-  </div>
-
-  <div class="card">
-    <img src="assets/invites/invite-3.png" alt="Mini symposium invite 3" style="width:100%; border-radius: 0.5rem;">
-  </div>
-
-  <div class="card">
-    <img src="assets/invites/invite-4.png" alt="Mini symposium invite 4" style="width:100%; border-radius: 0.5rem;">
-  </div>
-
-  <div class="card">
-    <img src="assets/invites/invite-5.png" alt="Mini symposium invite 5" style="width:100%; border-radius: 0.5rem;">
-  </div>
-
-  <div class="card">
-    <img src="assets/invites/invite-6.png" alt="Mini symposium invite 6" style="width:100%; border-radius: 0.5rem;">
-  </div>
-</div>
-
-
       <div class="card-grid">
-<div class="card" style="border: 2px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #e8fff6 100%);">
-  <div class="label-small">SAVE THE DATE · INTERNATIONAL EVENT</div>
-
-  <div class="card-title">
-    🌍 International Wetlands Day 2026
-    <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.75rem;">
-  <span style="font-size:0.8rem; color: var(--text-dim); width:100%;">
-    Choose how you would like to participate:
-  </span>
-
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdiXWWiwzmlbsrEM2r-m0uU36mCQf2Aflj2y8JWRjZpqkFVYg/viewform" target="_blank"
-     style="
-       text-decoration: none;
-       background: var(--accent);
-       color: #fff;
-       padding: 0.6rem 0.9rem;
-       border-radius: var(--radius-lg);
-       font-size: 0.8rem;
-       font-weight: 600;
-       box-shadow: 0 8px 18px rgba(27,122,94,0.35);
-     ">
-    🏛️ On-site registration
-  </a>
-
-  <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_NzJhYmIzMTYtYjA3NS00M2I5LThlZjItZjUxMjY1NTgzY2E2%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522084578d9-400d-4a5a-a7c7-e76ca47af400%2522%252c%2522Oid%2522%253a%252206ffc73a-447b-4d0a-99c2-c5aad0eda2bc%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=557076a4-f2b7-4818-8197-2e03fe0f0785&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank"
-     style="
-       text-decoration: none;
-       background: #ffffff;
-       color: var(--accent);
-       padding: 0.6rem 0.9rem;
-       border-radius: var(--radius-lg);
-       font-size: 0.8rem;
-       font-weight: 600;
-       border: 1px solid rgba(27,122,94,0.4);
-     ">
-    💻 Online registration
-  </a>
-</div>
-
-  </div>
-
-  <div class="card-text">
-    Join us in Nijmegen to celebrate wetlands as living systems essential for
-    climate regulation, biodiversity, and human well-being.
-    A day of science, dialogue, and collaboration bringing together students,
-    researchers, and the wider community.
-  </div>
-
-  <div class="card-footer">
-    📅 <b>02 February 2026</b><br/>
-    📍 Radboud University, Nijmegen – The Netherlands<br/>
-    Organised by <b>ECO³ – Ecology, Collaboration, Open Education Group</b>
-  </div>
-</div>
+        <div class="card" style="border: 2px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #e8fff6 100%);">
+          <div class="label-small">SAVE THE DATE · INTERNATIONAL EVENT</div>
+          <div class="card-title">🌍 International Wetlands Day 2026</div>
+          <div class="card-text">
+            Join us in Nijmegen to celebrate wetlands as living systems essential for
+            climate regulation, biodiversity, and human well-being.
+            A day of science, dialogue, and collaboration bringing together students,
+            researchers, and the wider community.
+          </div>
+          <div class="card-footer">
+            📅 <b>02 February 2026</b><br/>
+            📍 Radboud University, Nijmegen – The Netherlands<br/>
+            Organised by <b>ECO³ – Ecology, Collaboration, Open Education Group</b>
+          </div>
+        </div>
 
         <div class="card">
           <div class="label-small">Video lecture</div>
@@ -529,9 +470,7 @@
             Placeholder for embedded YouTube/Vimeo link. Students explain how wildfire ash
             affects water chemistry, plankton communities, and CO₂ fluxes.
           </div>
-          <div class="card-footer">
-            Instructor: UNEMAT · Field case: Pantanal (Brazil)
-          </div>
+          <div class="card-footer">Instructor: UNEMAT · Field case: Pantanal (Brazil)</div>
         </div>
 
         <div class="card">
@@ -541,9 +480,7 @@
             PDF slides + recorded session. Intro to experimental design,
             basic modeling, and interpretation of ecological data.
           </div>
-          <div class="card-footer">
-            Joint session · UFJF / Radboud
-          </div>
+          <div class="card-footer">Joint session · UFJF / Radboud</div>
         </div>
 
         <div class="card">
@@ -553,9 +490,7 @@
             Code examples and step-by-step demos for spatial data analysis.
             This block will host .R scripts and screen-capture tutorials.
           </div>
-          <div class="card-footer">
-            Hands-on material · UFJF
-          </div>
+          <div class="card-footer">Hands-on material · UFJF</div>
         </div>
 
         <div class="card">
@@ -565,10 +500,71 @@
             Lecture notes and field activities comparing European peatlands under fire pressure
             and Pantanal floodplains under drought and burning.
           </div>
+          <div class="card-footer">Joint teaching · Radboud / UNEMAT</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="panel" id="panel-events">
+      <div class="panel-header">
+        <div class="panel-title">🎤 Events & Calls</div>
+        <div class="panel-desc">
+          Mini-symposia, workshops, and open calls for participation. Click a poster to open it in full size.
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card" style="border: 2px solid var(--accent); background: linear-gradient(135deg, #ffffff 0%, #e8fff6 100%);">
+          <div class="label-small">MINI SYMPOSIUM · CALL FOR PARTICIPATION</div>
+          <div class="card-title">🌿 Join our Mini Symposium</div>
+          <div class="card-text">
+            Choose how you would like to participate and share the invitation posters with your network.
+          </div>
+
+          <div class="btn-row">
+            <a class="btn-primary"
+               href="https://docs.google.com/forms/d/e/1FAIpQLSdiXWWiwzmlbsrEM2r-m0uU36mCQf2Aflj2y8JWRjZpqkFVYg/viewform"
+               target="_blank" rel="noopener noreferrer">
+              🏛️ On-site registration
+            </a>
+
+            <a class="btn-secondary"
+               href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_NzJhYmIzMTYtYjA3NS00M2I5LThlZjItZjUxMjY1NTgzY2E2%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522084578d9-400d-4a5a-a7c7-e76ca47af400%2522%252c%2522Oid%2522%253a%252206ffc73a-447b-4d0a-99c2-c5aad0eda2bc%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=557076a4-f2b7-4818-8197-2e03fe0f0785&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true"
+               target="_blank" rel="noopener noreferrer">
+              💻 Online registration
+            </a>
+          </div>
+
           <div class="card-footer">
-            Joint teaching · Radboud / UNEMAT
+            Posters are hosted in <b>assets/invites/</b> · Format: JPEG
           </div>
         </div>
+
+        <!-- Posters (CLICK TO OPEN) -->
+        <a class="card card-link" href="assets/invites/invite-1.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-1.jpeg" alt="Mini symposium invite 1"></div>
+        </a>
+
+        <a class="card card-link" href="assets/invites/invite-2.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-2.jpeg" alt="Mini symposium invite 2"></div>
+        </a>
+
+        <a class="card card-link" href="assets/invites/invite-3.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-3.jpeg" alt="Mini symposium invite 3"></div>
+        </a>
+
+        <a class="card card-link" href="assets/invites/invite-4.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-4.jpeg" alt="Mini symposium invite 4"></div>
+        </a>
+
+        <a class="card card-link" href="assets/invites/invite-5.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-5.jpeg" alt="Mini symposium invite 5"></div>
+        </a>
+
+        <a class="card card-link" href="assets/invites/invite-6.jpeg" target="_blank" rel="noopener noreferrer">
+          <div class="img-wrap"><img src="assets/invites/invite-6.jpeg" alt="Mini symposium invite 6"></div>
+        </a>
 
       </div>
     </section>
@@ -576,9 +572,7 @@
     <!-- PUBLICATIONS -->
     <section class="panel" id="panel-publications">
       <div class="panel-header">
-        <div class="panel-title">
-          📄 Publications & Reading
-        </div>
+        <div class="panel-title">📄 Publications & Reading</div>
         <div class="panel-desc">
           Open-access articles, reports, and student theses related to fire ecology,
           aquatic systems, ash deposition, restoration, and socio-environmental resilience.
@@ -587,183 +581,118 @@
       </div>
 
       <div class="pub-list">
-
-        <!-- 1 -->
         <div class="pub-card">
           <div class="pub-journal-year">Resources, Conservation & Recycling · 2025</div>
-          <div class="pub-title">
-            Low carbon footprint of Nile tilapia farming with recirculation aquaculture.
-          </div>
+          <div class="pub-title">Low carbon footprint of Nile tilapia farming with recirculation aquaculture.</div>
           <div class="pub-authors">
             Melo Júnior, A.M. de; Kosten, S.; Duque, V.L.C.; Santos, A.A.O.; Amado, A.M.; Soranço, L.C.;
             Dreise, J.; Martins, A.C.; Nasário, J.; Dalbem Barbosa, A.P.; Muzitano, I.S.; Cardoso, G.M.;
             Barbosa, Í.; Paranaíba, J.R.; de Oliveira, G.R.; Almeida, R.; Roland, F.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: aquaculture sustainability and carbon footprint.
-          </div>
+          <div class="pub-notes">Focus: aquaculture sustainability and carbon footprint.</div>
         </div>
 
-        <!-- 2 -->
         <div class="pub-card">
           <div class="pub-journal-year">Geoderma · 2024</div>
           <div class="pub-title">
-            Year-round CO₂ emissions from the drawdown area of a tropical reservoir:
-            Strong seasonal and spatial variation.
+            Year-round CO₂ emissions from the drawdown area of a tropical reservoir: Strong seasonal and spatial variation.
           </div>
           <div class="pub-authors">
             Barbosa, Í.; Paranaíba, J.R.; Sobek, S.; Kosten, S.; Almeida, R.M.; Duque, V.; Mendonça, N.;
             Barros, N.; Mendonça, R.
           </div>
-          <div class="pub-notes">
-            Focus: CO₂ fluxes linked to exposed reservoir sediments.
-          </div>
+          <div class="pub-notes">Focus: CO₂ fluxes linked to exposed reservoir sediments.</div>
         </div>
 
-        <!-- 3 -->
         <div class="pub-card">
           <div class="pub-journal-year">Frontiers in Water · 2023</div>
-          <div class="pub-title">
-            Widespread dominance of methane ebullition over diffusion
-            in freshwater aquaculture ponds.
-          </div>
+          <div class="pub-title">Widespread dominance of methane ebullition over diffusion in freshwater aquaculture ponds.</div>
           <div class="pub-authors">
             Vroom, R.J.E.; Kosten, S.; Almeida, R.M.; Mendonça, R.; Muzitano, I.S.;
             Barbosa, Í.; Nasário, J.; Oliveira Junior, E.S.; Flecker, A.S.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: methane emissions in aquaculture systems.
-          </div>
+          <div class="pub-notes">Focus: methane emissions in aquaculture systems.</div>
         </div>
 
-        <!-- 4 -->
         <div class="pub-card">
           <div class="pub-journal-year">PLOS ONE · 2020</div>
           <div class="pub-title">
-            Sediment drying–rewetting cycles enhance greenhouse gas emissions,
-            nutrient and trace element release, and promote water cytogenotoxicity.
+            Sediment drying–rewetting cycles enhance greenhouse gas emissions, nutrient and trace element release, and promote water cytogenotoxicity.
           </div>
           <div class="pub-authors">
-            Paranaíba, J.R.; Quadra, G.; Josué, I.I.P.; Almeida, R.M.; Mendonça, R.;
-            Cardoso, S.J.; Silva, J.; Kosten, S.; Campos, J.M.; Almeida, J.; Araújo, R.L.;
-            Roland, F.; Barros, N.
+            Paranaíba, J.R.; Quadra, G.; Josué, I.I.P.; Almeida, R.M.; Mendonça, R.; Cardoso, S.J.; Silva, J.; Kosten, S.;
+            Campos, J.M.; Almeida, J.; Araújo, R.L.; Roland, F.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: how hydrological fluctuation boosts GHG and contaminants.
-          </div>
+          <div class="pub-notes">Focus: how hydrological fluctuation boosts GHG and contaminants.</div>
         </div>
 
-        <!-- 5 -->
         <div class="pub-card">
           <div class="pub-journal-year">Science of the Total Environment · 2020</div>
           <div class="pub-title">
-            Better assessments of greenhouse gas emissions from global fish ponds
-            needed to adequately evaluate aquaculture footprint.
+            Better assessments of greenhouse gas emissions from global fish ponds needed to adequately evaluate aquaculture footprint.
           </div>
           <div class="pub-authors">
-            Kosten, S.; Almeida, R.M.; Barbosa, Í.; Mendonça, R.; Muzitano, I.S.;
-            Oliveira-Junior, E.S.; Vroom, R.J.E.; Wang, H.-J.; Barros, N.
+            Kosten, S.; Almeida, R.M.; Barbosa, Í.; Mendonça, R.; Muzitano, I.S.; Oliveira-Junior, E.S.; Vroom, R.J.E.; Wang, H.-J.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: calling for stronger global accounting of aquaculture GHG.
-          </div>
+          <div class="pub-notes">Focus: calling for stronger global accounting of aquaculture GHG.</div>
         </div>
 
-        <!-- 6 -->
         <div class="pub-card">
           <div class="pub-journal-year">Limnology & Oceanography · 2019</div>
-          <div class="pub-title">
-            Seasonal and diel variation in greenhouse gas emissions from an urban pond
-            and its major drivers.
-          </div>
+          <div class="pub-title">Seasonal and diel variation in greenhouse gas emissions from an urban pond and its major drivers.</div>
           <div class="pub-authors">
-            Bergen, T.J.H.M.; Barros, N.; Mendonça, R.; Aben, R.C.H.; Althuizen, I.H.J.;
-            Huszar, V.; Lamers, L.P.M.; Lürling, M.; Roland, F.; Kosten, S.
+            Bergen, T.J.H.M.; Barros, N.; Mendonça, R.; Aben, R.C.H.; Althuizen, I.H.J.; Huszar, V.; Lamers, L.P.M.; Lürling, M.; Roland, F.; Kosten, S.
           </div>
-          <div class="pub-notes">
-            Focus: how time of day and season control GHG in urban waters.
-          </div>
+          <div class="pub-notes">Focus: how time of day and season control GHG in urban waters.</div>
         </div>
 
-        <!-- 7 -->
         <div class="pub-card">
           <div class="pub-journal-year">Aquatic Sciences · 2019</div>
-          <div class="pub-title">
-            Carbon dioxide emission from drawdown areas of a Brazilian reservoir
-            is linked to surrounding land cover.
-          </div>
+          <div class="pub-title">Carbon dioxide emission from drawdown areas of a Brazilian reservoir is linked to surrounding land cover.</div>
           <div class="pub-authors">
-            Almeida, R.M.; Paranaíba, J.R.; Barbosa, Í.; Sobek, S.; Kosten, S.;
-            Linkhorst, A.; Mendonça, R.; Quadra, G.; Roland, F.; Barros, N.
+            Almeida, R.M.; Paranaíba, J.R.; Barbosa, Í.; Sobek, S.; Kosten, S.; Linkhorst, A.; Mendonça, R.; Quadra, G.; Roland, F.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: land use and CO₂ hotspots at reservoir margins.
-          </div>
+          <div class="pub-notes">Focus: land use and CO₂ hotspots at reservoir margins.</div>
         </div>
 
-        <!-- 8 -->
         <div class="pub-card">
           <div class="pub-journal-year">Inland Waters · 2018</div>
-          <div class="pub-title">
-            Extreme drought boosts CO and CH₄ emissions from reservoir drawdown areas.
-          </div>
+          <div class="pub-title">Extreme drought boosts CO and CH₄ emissions from reservoir drawdown areas.</div>
           <div class="pub-authors">
-            Kosten, S.; van den Berg, S.; Mendonça, R.; Paranaíba, J.R.; Roland, F.;
-            Sobek, S.; van den Hoek, J.; Barros, N.
+            Kosten, S.; van den Berg, S.; Mendonça, R.; Paranaíba, J.R.; Roland, F.; Sobek, S.; van den Hoek, J.; Barros, N.
           </div>
-          <div class="pub-notes">
-            Focus: drought intensifies greenhouse gas release.
-          </div>
+          <div class="pub-notes">Focus: drought intensifies greenhouse gas release.</div>
         </div>
 
-        <!-- 9 -->
         <div class="pub-card">
           <div class="pub-journal-year">Nature Communications · 2017</div>
-          <div class="pub-title">
-            Cross-continental increase in methane ebullition under climate change.
-          </div>
+          <div class="pub-title">Cross-continental increase in methane ebullition under climate change.</div>
           <div class="pub-authors">
-            Aben, R.C.H.; Barros, N.; van Donk, E.; Frenken, T.; Hilt, S.; Kazanjian, G.;
-            Lamers, L.P.M.; Peeters, E.T.H.M.; Roelofs, J.G.M.; de Senerpont Domis, L.N.;
-            Stephan, S.; Velthuis, M.; van de Waal, D.B.; Wik, M.; Thornton, B.F.; Wilkinson, J.;
-            Delsontro, T.; Kosten, S.
+            Aben, R.C.H.; Barros, N.; van Donk, E.; Frenken, T.; Hilt, S.; Kazanjian, G.; Lamers, L.P.M.; Peeters, E.T.H.M.; Roelofs, J.G.M.;
+            de Senerpont Domis, L.N.; Stephan, S.; Velthuis, M.; van de Waal, D.B.; Wik, M.; Thornton, B.F.; Wilkinson, J.; Delsontro, T.; Kosten, S.
           </div>
-          <div class="pub-notes">
-            Focus: methane bubbling (ebullition) intensifies with warming.
-          </div>
+          <div class="pub-notes">Focus: methane bubbling (ebullition) intensifies with warming.</div>
         </div>
 
-        <!-- 10 -->
         <div class="pub-card">
           <div class="pub-journal-year">Frontiers in Microbiology · 2016</div>
-          <div class="pub-title">
-            High primary production contrasts with intense carbon emission
-            in a eutrophic tropical reservoir.
-          </div>
+          <div class="pub-title">High primary production contrasts with intense carbon emission in a eutrophic tropical reservoir.</div>
           <div class="pub-authors">
-            Almeida, R.M.; Nóbrega, G.N.; Junger, P.C.; Figueiredo, A.V.; Andrade, A.S.;
-            de Moura, C.G.B.; Tonetta, D.; Oliveira, E.S.; Araújo, F.; Rust, F.; Piñeiro-Guerra, J.M.;
-            Mendonça, J.R.; Medeiros, L.R.; Pinheiro, L.; Miranda, M.; Costa, M.R.A.;
-            Melo, M.L.; Nobre, R.L.G.; Benevides, T.; Barros, N. et al.
+            Almeida, R.M.; Nóbrega, G.N.; Junger, P.C.; Figueiredo, A.V.; Andrade, A.S.; de Moura, C.G.B.; Tonetta, D.; Oliveira, E.S.; Araújo, F.; Rust, F.;
+            Piñeiro-Guerra, J.M.; Mendonça, J.R.; Medeiros, L.R.; Pinheiro, L.; Miranda, M.; Costa, M.R.A.; Melo, M.L.; Nobre, R.L.G.; Benevides, T.; Barros, N. et al.
           </div>
-          <div class="pub-notes">
-            Focus: productivity vs. carbon emissions in tropical reservoirs.
-          </div>
+          <div class="pub-notes">Focus: productivity vs. carbon emissions in tropical reservoirs.</div>
         </div>
-
       </div>
     </section>
 
     <!-- GALLERY -->
     <section class="panel" id="panel-gallery">
       <div class="panel-header">
-        <div class="panel-title">
-          📷 Field Gallery
-        </div>
+        <div class="panel-title">📷 Field Gallery</div>
         <div class="panel-desc">
           Photos from field campaigns, lab work, community outreach,
-          Saberes em Arte, Transforma-Ações, and COP Pantanal – Saberes e Ações pelo Clima (https://coppantanalorg.squarespace.com/).
-          (Here you will later drop images + captions.)
+          Saberes em Arte, Transforma-Ações, and COP Pantanal – Saberes e Ações pelo Clima.
         </div>
       </div>
 
@@ -775,9 +704,7 @@
             Students leading fire and water quality outreach activities with local schools
             and riverside families in Cáceres–MT. Educational material + dialogue circle.
           </div>
-          <div class="card-footer">
-            Programme: Transforma-Ações
-          </div>
+          <div class="card-footer">Programme: Transforma-Ações</div>
         </div>
 
         <div class="card">
@@ -787,9 +714,7 @@
             Dutch and Brazilian students collecting samples in a post-fire peatland area,
             discussing restoration strategies and carbon balance.
           </div>
-          <div class="card-footer">
-            Field supervision: Radboud University
-          </div>
+          <div class="card-footer">Field supervision: Radboud University</div>
         </div>
 
         <div class="card">
@@ -800,9 +725,7 @@
             Students translating climate and water research into accessible language
             for children and local communities.
           </div>
-          <div class="card-footer">
-            Led by UNEMAT students
-          </div>
+          <div class="card-footer">Led by UNEMAT students</div>
         </div>
       </div>
     </section>
@@ -810,12 +733,8 @@
     <!-- ABOUT -->
     <section class="panel" id="panel-about">
       <div class="panel-header">
-        <div class="panel-title">
-          🌎 About ECO<sup>³</sup>
-        </div>
-        <div class="panel-desc">
-          Who we are, what we are building, and how people can participate.
-        </div>
+        <div class="panel-title">🌎 About ECO<sup>³</sup></div>
+        <div class="panel-desc">Who we are, what we are building, and how people can participate.</div>
       </div>
 
       <div class="about-block">
@@ -872,20 +791,18 @@
   <footer>
     <div class="footer-inner">
       <p><b>ECO³ – Ecology, Collaboration, Open Education Group</b></p>
-      <p class="muted">
-        Radboud University · UFJF · UNEMAT
-      </p>
-      <p class="muted">
-        Open environmental learning platform. Early prototype.
-      </p>
+      <p class="muted">Radboud University · UFJF · UNEMAT</p>
+      <p class="muted">Open environmental learning platform. Early prototype.</p>
     </div>
   </footer>
 
   <script>
     // simple tab system
     const tabs = document.querySelectorAll(".tab-btn");
+
     const panels = {
       classes: document.getElementById("panel-classes"),
+      events: document.getElementById("panel-events"),
       publications: document.getElementById("panel-publications"),
       gallery: document.getElementById("panel-gallery"),
       about: document.getElementById("panel-about"),
@@ -893,26 +810,16 @@
 
     tabs.forEach(btn => {
       btn.addEventListener("click", () => {
-        // set active tab button
         tabs.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
-        // show relevant panel
         const tabName = btn.getAttribute("data-tab");
         Object.keys(panels).forEach(name => {
-          if (name === tabName) {
-            panels[name].classList.add("active");
-          } else {
-            panels[name].classList.remove("active");
-          }
+          if (name === tabName) panels[name].classList.add("active");
+          else panels[name].classList.remove("active");
         });
       });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
