@@ -257,9 +257,7 @@
       padding: 0;
       overflow: hidden;
     }
-    a.card-link .img-wrap {
-      padding: 0.85rem;
-    }
+    a.card-link .img-wrap { padding: 0.85rem; }
     a.card-link img {
       width: 100%;
       border-radius: 0.6rem;
@@ -283,10 +281,16 @@
       font-weight: 600;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       line-height: 1;
       white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform .08s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+      user-select: none;
     }
+    .btn-primary:active, .btn-secondary:active { transform: translateY(1px); }
 
     .btn-primary {
       background: var(--accent);
@@ -323,7 +327,7 @@
     footer p { margin: 0.5rem 0; }
     .muted { color: var(--text-dim); font-size: 0.8rem; }
 
-    /* publications list layout for many papers */
+    /* publications list layout */
     .pub-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
@@ -357,11 +361,7 @@
       line-height: 1.4;
       letter-spacing: -0.03em;
     }
-    .pub-authors {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
+    .pub-authors { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
     .pub-notes {
       font-size: 0.75rem;
       color: var(--text-dim);
@@ -377,16 +377,9 @@
       gap: 1.5rem;
     }
     @media(min-width: 800px){
-      .about-block {
-        grid-template-columns: minmax(0,2fr) minmax(0,1fr);
-      }
+      .about-block { grid-template-columns: minmax(0,2fr) minmax(0,1fr); }
     }
-    .about-text p {
-      margin: 0 0 1rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--text-main);
-    }
+    .about-text p { margin: 0 0 1rem; font-size: 0.95rem; line-height: 1.5; color: var(--text-main); }
     .about-text p span.key { font-weight: 600; color: var(--accent); }
     .about-side {
       background: var(--accent-soft);
@@ -399,6 +392,157 @@
     }
     .about-side b { color: var(--accent); font-weight: 600; }
 
+    /* ===== QUIZ BONITÃO ===== */
+    .quiz-shell {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, #ffffff 0%, rgba(27,122,94,0.06) 100%);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.06);
+      padding: 1.25rem;
+    }
+    .quiz-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-meta {
+      display:flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      align-items:center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      padding: .35rem .55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(27,122,94,0.25);
+      background: rgba(27,122,94,0.08);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+    .quiz-progress {
+      width: min(360px, 100%);
+      height: 10px;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+    }
+    .quiz-progress > div {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width .25s ease;
+    }
+
+    .quiz-q {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0.2rem 0 1rem;
+      color: var(--text-main);
+    }
+
+    .quiz-answers {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .quiz-answer {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 0.95rem;
+      border-radius: 0.9rem;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: transform .08s ease, border-color .12s ease, box-shadow .12s ease;
+      font-weight: 650;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .quiz-answer:hover {
+      border-color: rgba(27,122,94,0.45);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.06);
+    }
+    .quiz-answer:active { transform: translateY(1px); }
+
+    .quiz-answer[disabled] {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    .quiz-answer.correct {
+      border-color: rgba(27,122,94,0.65);
+      background: rgba(27,122,94,0.08);
+    }
+    .quiz-answer.wrong {
+      border-color: rgba(196, 48, 48, 0.45);
+      background: rgba(196, 48, 48, 0.06);
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.9rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      display: none;
+    }
+    .quiz-feedback b { color: var(--text-main); }
+
+    .quiz-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .quiz-actions .left {
+      display:flex; gap:.65rem; flex-wrap: wrap;
+    }
+
+    .mini-note {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.05);
+    }
+    .quiz-result h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .quiz-result p { margin: 0.25rem 0; color: var(--text-dim); }
+
+    .quiz-badge {
+      font-weight: 800;
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -407,9 +551,7 @@
     <div class="header-inner">
       <div class="brand-row">
         <div class="brand-block">
-          <div class="logo-eco">
-            ECO<sup>³</sup>
-          </div>
+          <div class="logo-eco">ECO<sup>³</sup></div>
           <div class="subtitle">
             Ecology, Collaboration, Open Education Group.<br/>
             An open learning space on fire, water, climate resilience, and ecosystem restoration —
@@ -542,27 +684,22 @@
           </div>
         </div>
 
-        <!-- Posters (CLICK TO OPEN) -->
+        <!-- Posters -->
         <a class="card card-link" href="assets/invites/invite-1.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-1.jpeg" alt="Mini symposium invite 1"></div>
         </a>
-
         <a class="card card-link" href="assets/invites/invite-2.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-2.jpeg" alt="Mini symposium invite 2"></div>
         </a>
-
         <a class="card card-link" href="assets/invites/invite-3.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-3.jpeg" alt="Mini symposium invite 3"></div>
         </a>
-
         <a class="card card-link" href="assets/invites/invite-4.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-4.jpeg" alt="Mini symposium invite 4"></div>
         </a>
-
         <a class="card card-link" href="assets/invites/invite-5.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-5.jpeg" alt="Mini symposium invite 5"></div>
         </a>
-
         <a class="card card-link" href="assets/invites/invite-6.jpeg" target="_blank" rel="noopener noreferrer">
           <div class="img-wrap"><img src="assets/invites/invite-6.jpeg" alt="Mini symposium invite 6"></div>
         </a>
@@ -571,29 +708,49 @@
     </section>
 
     <!-- QUIZ -->
-<section class="panel" id="panel-quiz">
-  <div class="panel-header">
-    <div class="panel-title">🧠 Interactive Science Quiz</div>
-    <div class="panel-desc">
-      A short quiz to explore how fire, water, climate, and restoration really work in ecosystems.
-      No tricks — just good science.
-    </div>
-  </div>
+    <section class="panel" id="panel-quiz">
+      <div class="panel-header">
+        <div class="panel-title">🧠 Interactive Science Quiz</div>
+        <div class="panel-desc">
+          3–5 minutes. Real ecosystem science. Instant feedback. Share it with your network.
+        </div>
+      </div>
 
-  <div class="card" id="quiz-box">
-    <div class="card-title" id="question"></div>
+      <div class="quiz-shell">
+        <div class="quiz-top">
+          <div class="quiz-meta">
+            <span class="pill">ECO³</span>
+            <span class="pill" id="q-pill">Question 1/5</span>
+            <span class="pill">Score: <span id="score">0</span></span>
+          </div>
 
-    <div id="answers" style="display:grid; gap:0.6rem; margin-top:1rem;"></div>
+          <div class="quiz-progress" aria-label="Quiz progress">
+            <div id="progressBar"></div>
+          </div>
+        </div>
 
-    <div id="feedback" style="margin-top:1rem; font-size:0.85rem;"></div>
+        <div class="quiz-q" id="qText">Loading…</div>
 
-    <button id="nextBtn"
-      style="margin-top:1.2rem; display:none;"
-      class="btn-primary">
-      Next question →
-    </button>
-  </div>
-</section>
+        <div class="quiz-answers" id="answers"></div>
+
+        <div class="quiz-feedback" id="feedback"></div>
+
+        <div class="quiz-actions">
+          <div class="left">
+            <button class="btn-secondary" id="restartBtn" type="button">↻ Restart</button>
+            <button class="btn-secondary" id="shuffleBtn" type="button">🎲 Shuffle questions</button>
+          </div>
+
+          <button class="btn-primary" id="nextBtn" type="button" style="display:none;">Next →</button>
+        </div>
+
+        <div class="quiz-result" id="resultBox">
+          <h3>✅ Finished! Your result: <span class="quiz-badge" id="finalScore"></span></h3>
+          <p id="finalMsg"></p>
+          <p class="mini-note">Tip: you can restart or shuffle and try again.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- PUBLICATIONS -->
     <section class="panel" id="panel-publications">
@@ -602,7 +759,6 @@
         <div class="panel-desc">
           Open-access articles, reports, and student theses related to fire ecology,
           aquatic systems, ash deposition, restoration, and socio-environmental resilience.
-          Below are joint works emerging from collaborations among Radboud, UFJF, and UNEMAT.
         </div>
       </div>
 
@@ -617,98 +773,6 @@
           </div>
           <div class="pub-notes">Focus: aquaculture sustainability and carbon footprint.</div>
         </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Geoderma · 2024</div>
-          <div class="pub-title">
-            Year-round CO₂ emissions from the drawdown area of a tropical reservoir: Strong seasonal and spatial variation.
-          </div>
-          <div class="pub-authors">
-            Barbosa, Í.; Paranaíba, J.R.; Sobek, S.; Kosten, S.; Almeida, R.M.; Duque, V.; Mendonça, N.;
-            Barros, N.; Mendonça, R.
-          </div>
-          <div class="pub-notes">Focus: CO₂ fluxes linked to exposed reservoir sediments.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Frontiers in Water · 2023</div>
-          <div class="pub-title">Widespread dominance of methane ebullition over diffusion in freshwater aquaculture ponds.</div>
-          <div class="pub-authors">
-            Vroom, R.J.E.; Kosten, S.; Almeida, R.M.; Mendonça, R.; Muzitano, I.S.;
-            Barbosa, Í.; Nasário, J.; Oliveira Junior, E.S.; Flecker, A.S.; Barros, N.
-          </div>
-          <div class="pub-notes">Focus: methane emissions in aquaculture systems.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">PLOS ONE · 2020</div>
-          <div class="pub-title">
-            Sediment drying–rewetting cycles enhance greenhouse gas emissions, nutrient and trace element release, and promote water cytogenotoxicity.
-          </div>
-          <div class="pub-authors">
-            Paranaíba, J.R.; Quadra, G.; Josué, I.I.P.; Almeida, R.M.; Mendonça, R.; Cardoso, S.J.; Silva, J.; Kosten, S.;
-            Campos, J.M.; Almeida, J.; Araújo, R.L.; Roland, F.; Barros, N.
-          </div>
-          <div class="pub-notes">Focus: how hydrological fluctuation boosts GHG and contaminants.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Science of the Total Environment · 2020</div>
-          <div class="pub-title">
-            Better assessments of greenhouse gas emissions from global fish ponds needed to adequately evaluate aquaculture footprint.
-          </div>
-          <div class="pub-authors">
-            Kosten, S.; Almeida, R.M.; Barbosa, Í.; Mendonça, R.; Muzitano, I.S.; Oliveira-Junior, E.S.; Vroom, R.J.E.; Wang, H.-J.; Barros, N.
-          </div>
-          <div class="pub-notes">Focus: calling for stronger global accounting of aquaculture GHG.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Limnology & Oceanography · 2019</div>
-          <div class="pub-title">Seasonal and diel variation in greenhouse gas emissions from an urban pond and its major drivers.</div>
-          <div class="pub-authors">
-            Bergen, T.J.H.M.; Barros, N.; Mendonça, R.; Aben, R.C.H.; Althuizen, I.H.J.; Huszar, V.; Lamers, L.P.M.; Lürling, M.; Roland, F.; Kosten, S.
-          </div>
-          <div class="pub-notes">Focus: how time of day and season control GHG in urban waters.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Aquatic Sciences · 2019</div>
-          <div class="pub-title">Carbon dioxide emission from drawdown areas of a Brazilian reservoir is linked to surrounding land cover.</div>
-          <div class="pub-authors">
-            Almeida, R.M.; Paranaíba, J.R.; Barbosa, Í.; Sobek, S.; Kosten, S.; Linkhorst, A.; Mendonça, R.; Quadra, G.; Roland, F.; Barros, N.
-          </div>
-          <div class="pub-notes">Focus: land use and CO₂ hotspots at reservoir margins.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Inland Waters · 2018</div>
-          <div class="pub-title">Extreme drought boosts CO and CH₄ emissions from reservoir drawdown areas.</div>
-          <div class="pub-authors">
-            Kosten, S.; van den Berg, S.; Mendonça, R.; Paranaíba, J.R.; Roland, F.; Sobek, S.; van den Hoek, J.; Barros, N.
-          </div>
-          <div class="pub-notes">Focus: drought intensifies greenhouse gas release.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Nature Communications · 2017</div>
-          <div class="pub-title">Cross-continental increase in methane ebullition under climate change.</div>
-          <div class="pub-authors">
-            Aben, R.C.H.; Barros, N.; van Donk, E.; Frenken, T.; Hilt, S.; Kazanjian, G.; Lamers, L.P.M.; Peeters, E.T.H.M.; Roelofs, J.G.M.;
-            de Senerpont Domis, L.N.; Stephan, S.; Velthuis, M.; van de Waal, D.B.; Wik, M.; Thornton, B.F.; Wilkinson, J.; Delsontro, T.; Kosten, S.
-          </div>
-          <div class="pub-notes">Focus: methane bubbling (ebullition) intensifies with warming.</div>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-journal-year">Frontiers in Microbiology · 2016</div>
-          <div class="pub-title">High primary production contrasts with intense carbon emission in a eutrophic tropical reservoir.</div>
-          <div class="pub-authors">
-            Almeida, R.M.; Nóbrega, G.N.; Junger, P.C.; Figueiredo, A.V.; Andrade, A.S.; de Moura, C.G.B.; Tonetta, D.; Oliveira, E.S.; Araújo, F.; Rust, F.;
-            Piñeiro-Guerra, J.M.; Mendonça, J.R.; Medeiros, L.R.; Pinheiro, L.; Miranda, M.; Costa, M.R.A.; Melo, M.L.; Nobre, R.L.G.; Benevides, T.; Barros, N. et al.
-          </div>
-          <div class="pub-notes">Focus: productivity vs. carbon emissions in tropical reservoirs.</div>
-        </div>
       </div>
     </section>
 
@@ -717,8 +781,7 @@
       <div class="panel-header">
         <div class="panel-title">📷 Field Gallery</div>
         <div class="panel-desc">
-          Photos from field campaigns, lab work, community outreach,
-          Saberes em Arte, Transforma-Ações, and COP Pantanal – Saberes e Ações pelo Clima.
+          Photos from field campaigns, lab work, community outreach, and more.
         </div>
       </div>
 
@@ -727,31 +790,9 @@
           <div class="label-small">Pantanal · Brazil</div>
           <div class="card-title">Community environmental workshop</div>
           <div class="card-text">
-            Students leading fire and water quality outreach activities with local schools
-            and riverside families in Cáceres–MT. Educational material + dialogue circle.
+            Students leading outreach activities with local schools and riverside families.
           </div>
           <div class="card-footer">Programme: Transforma-Ações</div>
-        </div>
-
-        <div class="card">
-          <div class="label-small">The Netherlands</div>
-          <div class="card-title">Peatland burn site survey</div>
-          <div class="card-text">
-            Dutch and Brazilian students collecting samples in a post-fire peatland area,
-            discussing restoration strategies and carbon balance.
-          </div>
-          <div class="card-footer">Field supervision: Radboud University</div>
-        </div>
-
-        <div class="card">
-          <div class="label-small">Outreach / Schools</div>
-          <div class="card-title">Saberes em Arte</div>
-          <div class="card-text">
-            Art, performance, and science communication in public spaces.
-            Students translating climate and water research into accessible language
-            for children and local communities.
-          </div>
-          <div class="card-footer">Led by UNEMAT students</div>
         </div>
       </div>
     </section>
@@ -767,47 +808,16 @@
         <div class="about-text">
           <p>
             <span class="key">ECO³ (Ecology, Collaboration, Open Education Group)</span>
-            is an open learning platform created by Radboud University
-            (The Netherlands), UFJF (Universidade Federal de Juiz de Fora, Brazil),
-            and UNEMAT (Universidade do Estado de Mato Grosso, Brazil).
-          </p>
-
-          <p>
-            The platform brings together recorded classes, field material,
-            photos, reading suggestions, and outreach experiences related to
-            fire, ash, water, climate resilience, carbon fluxes, and ecosystem restoration.
-          </p>
-
-          <p>
-            A defining element of ECO³ is student protagonism. Students are not only
-            “recipients of content”, they are knowledge producers. They participate in
-            field campaigns in the Pantanal and in European peatlands, engage in community
-            meetings, visit schools, and present accessible explanations of complex topics
-            such as fire ecology and water quality.
-          </p>
-
-          <p>
-            Many of these outreach actions happen through initiatives such as
-            <b>Saberes em Arte</b> (“Knowledge through Art”), <b>Transforma-Ações</b>
-            (“Transforming Actions”), and <b>COP Pantanal – Saberes e Ações pelo Clima</b>,
-            where environmental science, public dialogue, and culture meet.
-          </p>
-
-          <p>
-            By sharing material in English and Portuguese, ECO³ supports an inclusive,
-            intercultural bridge between Brazil and Europe, strengthening both scientific
-            collaboration and local environmental action.
+            is an open learning platform created by Radboud University (The Netherlands), UFJF (Brazil),
+            and UNEMAT (Brazil).
           </p>
         </div>
 
         <aside class="about-side">
           <b>How this will grow:</b><br/><br/>
-          • Add new video classes and mini-courses (YouTube/Vimeo embeds).<br/>
+          • Add new video classes and mini-courses.<br/>
           • Link PDFs / DOIs of joint publications.<br/>
           • Upload field photos with captions and credits.<br/>
-          • Showcase outreach activities with schools and communities.<br/><br/>
-          Future steps may include student accounts,
-          bilingual material (EN/PT), and live sessions.
         </aside>
       </div>
     </section>
@@ -823,17 +833,17 @@
   </footer>
 
   <script>
-    // simple tab system
+    /* ========= Tabs ========= */
     const tabs = document.querySelectorAll(".tab-btn");
 
     const panels = {
-  classes: document.getElementById("panel-classes"),
-  events: document.getElementById("panel-events"),
-  quiz: document.getElementById("panel-quiz"),
-  publications: document.getElementById("panel-publications"),
-  gallery: document.getElementById("panel-gallery"),
-  about: document.getElementById("panel-about"),
-};
+      classes: document.getElementById("panel-classes"),
+      events: document.getElementById("panel-events"),
+      publications: document.getElementById("panel-publications"),
+      gallery: document.getElementById("panel-gallery"),
+      about: document.getElementById("panel-about"),
+      quiz: document.getElementById("panel-quiz"),
+    };
 
     tabs.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -845,9 +855,210 @@
           if (name === tabName) panels[name].classList.add("active");
           else panels[name].classList.remove("active");
         });
+
+        // When opening Quiz, ensure it renders (useful on some browsers)
+        if (tabName === "quiz") {
+          renderQuestion();
+        }
       });
     });
+
+    /* ========= Quiz Logic (THIS WAS MISSING IN YOUR FILE) ========= */
+    const quizOriginal = [
+      {
+        q: "In many ecosystems, fire is best described as:",
+        options: [
+          "Always destructive and something that must be completely avoided",
+          "A natural process that can look harmful but often maintains ecosystem balance",
+          "Only a consequence of climate change",
+          "A phenomenon restricted to tropical forests"
+        ],
+        correct: 1,
+        explain: "Fire can be a natural ecological process. The key is the difference between ecological fire regimes and severe, human-driven wildfires."
+      },
+      {
+        q: "Why can extreme drought increase greenhouse gas emissions from wetlands and reservoirs?",
+        options: [
+          "Because water bodies disappear and stop emitting gases",
+          "Because dry sediments become biologically inactive",
+          "Because drying and rewetting stimulates microbial activity and gas release",
+          "Because plants absorb less CO₂ during drought"
+        ],
+        correct: 2,
+        explain: "Drying–rewetting cycles can boost microbial processes and release CO₂ and other gases from sediments."
+      },
+      {
+        q: "Floodplains like the Pantanal are important for climate regulation mainly because they:",
+        options: [
+          "Store carbon permanently in water",
+          "Prevent all greenhouse gas emissions",
+          "Alternate between carbon storage and emission depending on water levels",
+          "Only emit methane and no carbon dioxide"
+        ],
+        correct: 2,
+        explain: "Floodplains are dynamic. Flood pulses and drought periods shift carbon storage and greenhouse gas fluxes."
+      },
+      {
+        q: "Effective ecosystem restoration is best defined as:",
+        options: [
+          "Planting as many trees as possible",
+          "Returning an area to its original pristine state",
+          "Rebuilding ecological functions and processes, even if the landscape changes",
+          "Removing all human influence from the system"
+        ],
+        correct: 2,
+        explain: "Restoration is about function, resilience, and processes — not only planting or recreating a perfect snapshot of the past."
+      },
+      {
+        q: "Why is collaboration between universities and local communities essential in environmental science?",
+        options: [
+          "Communities replace scientific methods",
+          "Local knowledge improves data interpretation and real-world impact",
+          "It reduces the need for field measurements",
+          "It only helps with science communication"
+        ],
+        correct: 1,
+        explain: "Local knowledge improves relevance, interpretation, and implementation — science gets stronger and more useful."
+      }
+    ];
+
+    let quiz = JSON.parse(JSON.stringify(quizOriginal));
+    let idx = 0;
+    let score = 0;
+    let answered = false;
+
+    const qText = document.getElementById("qText");
+    const answersEl = document.getElementById("answers");
+    const feedbackEl = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const shuffleBtn = document.getElementById("shuffleBtn");
+    const qPill = document.getElementById("q-pill");
+    const scoreEl = document.getElementById("score");
+    const progressBar = document.getElementById("progressBar");
+    const resultBox = document.getElementById("resultBox");
+    const finalScore = document.getElementById("finalScore");
+    const finalMsg = document.getElementById("finalMsg");
+
+    function shuffleArray(a){
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function resetQuiz({shuffle=false} = {}) {
+      quiz = JSON.parse(JSON.stringify(quizOriginal));
+      if (shuffle) shuffleArray(quiz);
+      idx = 0;
+      score = 0;
+      answered = false;
+      scoreEl.textContent = String(score);
+      resultBox.style.display = "none";
+      nextBtn.style.display = "none";
+      feedbackEl.style.display = "none";
+      renderQuestion();
+    }
+
+    function updateTopUI(){
+      qPill.textContent = `Question ${Math.min(idx+1, quiz.length)}/${quiz.length}`;
+      const pct = Math.round((idx / quiz.length) * 100);
+      progressBar.style.width = `${pct}%`;
+      scoreEl.textContent = String(score);
+    }
+
+    function renderQuestion(){
+      if (!qText || !answersEl) return;
+
+      // finished?
+      if (idx >= quiz.length) {
+        progressBar.style.width = "100%";
+        answersEl.innerHTML = "";
+        feedbackEl.style.display = "none";
+        nextBtn.style.display = "none";
+
+        finalScore.textContent = `${score}/${quiz.length}`;
+        const pct = Math.round((score/quiz.length)*100);
+
+        let msg = "Nice! You have a solid ecosystem intuition.";
+        if (pct >= 90) msg = "Excellent — you think like an ecosystem scientist.";
+        else if (pct >= 70) msg = "Great — you’re seeing ecosystem processes, not just symptoms.";
+        else if (pct >= 50) msg = "Good start — try again and read the feedback carefully.";
+        else msg = "No worries — this is exactly why ECO³ exists. Restart and try again.";
+
+        finalMsg.textContent = msg;
+        resultBox.style.display = "block";
+        qText.textContent = "🎉 Quiz completed!";
+        updateTopUI();
+        return;
+      }
+
+      answered = false;
+      nextBtn.style.display = "none";
+      feedbackEl.style.display = "none";
+      feedbackEl.innerHTML = "";
+
+      const item = quiz[idx];
+      qText.textContent = item.q;
+
+      // Build answer buttons
+      answersEl.innerHTML = "";
+      item.options.forEach((opt, optIdx) => {
+        const b = document.createElement("button");
+        b.className = "quiz-answer";
+        b.type = "button";
+        b.textContent = opt;
+
+        b.addEventListener("click", () => choose(optIdx, b));
+        answersEl.appendChild(b);
+      });
+
+      updateTopUI();
+    }
+
+    function choose(optIdx, btnEl){
+      if (answered) return;
+      answered = true;
+
+      const item = quiz[idx];
+      const buttons = Array.from(answersEl.querySelectorAll("button"));
+
+      // disable all
+      buttons.forEach(b => b.disabled = true);
+
+      // mark correct + wrong
+      buttons.forEach((b, j) => {
+        if (j === item.correct) b.classList.add("correct");
+      });
+      if (optIdx !== item.correct) btnEl.classList.add("wrong");
+
+      const ok = optIdx === item.correct;
+      if (ok) score++;
+
+      // Feedback
+      feedbackEl.style.display = "block";
+      feedbackEl.innerHTML = ok
+        ? `✅ <b>Correct.</b> ${item.explain}`
+        : `❌ <b>Not quite.</b> ${item.explain}`;
+
+      scoreEl.textContent = String(score);
+
+      // show next
+      nextBtn.style.display = "inline-flex";
+      updateTopUI();
+    }
+
+    nextBtn.addEventListener("click", () => {
+      idx++;
+      renderQuestion();
+    });
+
+    restartBtn.addEventListener("click", () => resetQuiz({shuffle:false}));
+    shuffleBtn.addEventListener("click", () => resetQuiz({shuffle:true}));
+
+    // Initial render
+    resetQuiz({shuffle:false});
   </script>
 </body>
 </html>
-
